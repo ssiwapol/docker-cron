@@ -1,0 +1,24 @@
+services:
+  cron:
+    depends_on:
+      - database
+    build: ./cron
+    image: cron
+    container_name: cron
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./cron/cron.log:/var/log/cron.log
+      - backup:/backup
+    networks:
+      - site-net
+
+volumes:
+  backup:
+
+networks:
+  site-net:
+    driver: bridge
