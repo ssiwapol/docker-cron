@@ -1,5 +1,5 @@
 FROM alpine
-RUN apk update && apk add mysql-client docker-cli
+RUN apk update && apk add mysql-client docker-cli curl
 COPY ./crontab.txt /cron/crontab.txt
 WORKDIR /cron
 RUN /usr/bin/crontab /cron/crontab.txt

@@ -6,6 +6,9 @@
 # run docker command
 00 3 * * 0 docker start [CONTAINER_NAME]
 
+# curl api
+00 3 * * 0 curl -X POST -H 'Content-Type: application/json' -H 'apikey: '$API_KEY'' -d '{"key": "value"}' -i http://webservice/api
+
 # backup mysql weekly
 00 3 * * 0 mysqldump -h database -uroot -p$MYSQL_ROOT_PASSWORD [DATABASE_NAME] | gzip > /backup/mysqldump/weekly/[DATABASE_NAME]_$(date +%Y%m%d-%H%M%S).sql.gz
 ```
